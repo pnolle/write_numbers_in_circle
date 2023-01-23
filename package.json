@@ -1,5 +1,6 @@
 {
     "scripts": {
-        "write": "node write.js"
+        "write": "node write.js",
+        "table": "node table.js"
     }
 }
