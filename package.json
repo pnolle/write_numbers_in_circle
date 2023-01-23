@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "write": "node write.js"
+    }
+}
