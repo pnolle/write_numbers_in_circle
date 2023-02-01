@@ -1,0 +1,25 @@
+% Generate 20x20 grid
+x = linspace(0,20,20);
+y = linspace(0,20,20);
+[X,Y] = meshgrid(x,y);
+
+% Plot grid
+figure;
+plot(X,Y,'k');
+hold on;
+plot(X',Y','k');
+
+% Generate random labeled points
+numPoints = 300;
+x_points = 20*rand(1,numPoints);
+y_points = 20*rand(1,numPoints);
+labels = randi(100,1,numPoints);
+
+% Plot labeled points
+for i = 1:numPoints
+    text(x_points(i), y_points(i), num2str(labels(i)));
+end
+
+% Set axis limits
+xlim([0 20]);
+ylim([0 20]);
