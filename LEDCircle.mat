@@ -1,0 +1,41 @@
+% MATLAB SCRIPT
+
+clear all; close all; clc;
+
+figure;
+
+r = 1; % radius of the first circle
+r2 = 0.95; % radius of the second circle
+x0 = 0; % x-coordinate of the center of the circles
+y0 = 0; % y-coordinate of the center of the circles
+
+% Draw the first circle
+hold on;
+rectangle('Position', [-r, -r, 2*r, 2*r], 'Curvature', [1, 1]);
+
+% Draw the markers on the first circle
+for i = 1:120
+    x = r * cos((i-60)/240*2*pi);
+    y = r * sin((i-60)/240*2*pi);
+    text(x, y, num2str(i));
+end
+
+% Draw the second circle
+rectangle('Position', [-r2, -r2, 2*r2, 2*r2], 'Curvature', [1, 1]);
+
+% Draw the markers on the second circle
+for i = 121:240
+    x = r2 * cos((i-60)/240*2*pi);
+    y = r2 * sin((i-60)/240*2*pi);
+    text(x0-x, y0-y, num2str(i));
+end
+
+% Draw the grid
+for i = 1:20
+    line([-r, r], [-r+(i-1)*(r*2/20), -r+(i-1)*(r*2/20)], 'Color', 'black');
+    line([-r+(i-1)*(r*2/20), -r+(i-1)*(r*2/20)], [-r, r], 'Color', 'black');
+    text(-r-0.05,-r+(i-1)*(r*2/20), num2str(20-i+1));
+    text(-r+(i-1)*(r*2/20),r+0.05, num2str(i));
+end
+
+axis equal;
