@@ -1,41 +1,53 @@
-% MATLAB SCRIPT
-
-clear all; close all; clc;
+% Draw the circles
+r1 = 1;
+r2 = 0.95;
+x0 = 0;
+y0 = 0;
+t = linspace(0,2*pi);
+x1 = r1*cos(t);
+y1 = r1*sin(t);
+x2 = r2*cos(t);
+y2 = r2*sin(t);
 
 figure;
+hold on
 
-r = 1; % radius of the first circle
-r2 = 0.95; % radius of the second circle
-x0 = 0; % x-coordinate of the center of the circles
-y0 = 0; % y-coordinate of the center of the circles
+% draw the first circle
+plot(x1,y1,'LineWidth',1.5);
 
-% Draw the first circle
-hold on;
-rectangle('Position', [-r, -r, 2*r, 2*r], 'Curvature', [1, 1]);
+% draw the 2nd circle
+plot(x2,y2,'LineWidth',1.5);
 
-% Draw the markers on the first circle
+% draw the grid
+x_grid = linspace(-1,1,21);
+y_grid = linspace(-1,1,21);
+[X,Y] = meshgrid(x_grid,y_grid);
+plot(X,Y,'k','LineWidth',1);
+plot(X',Y','k','LineWidth',1);
+
+% label the grid
+grid_labels = cell(20,20);
+for i = 1:20
+    for j = 1:20
+        grid_labels{i,j} = ['x' num2str(j) 'y' num2str(i)];
+    end
+end
+
+text(-1+0.05,-1+0.05,grid_labels(1,1),'fontsize',8);
+text(-1+0.05,1-0.05,grid_labels(20,1),'fontsize',8);
+text(1-0.05,-1+0.05,grid_labels(1,20),'fontsize',8);
+text(1-0.05,1-0.05,grid_labels(20,20),'fontsize',8);
+
+% label the first circle
 for i = 1:120
-    x = r * cos((i-60)/240*2*pi);
-    y = r * sin((i-60)/240*2*pi);
+    x = r1 * cos((i-60)/240*2*pi);
+    y = r1 * sin((i-60)/240*2*pi);
     text(x, y, num2str(i));
 end
 
-% Draw the second circle
-rectangle('Position', [-r2, -r2, 2*r2, 2*r2], 'Curvature', [1, 1]);
-
-% Draw the markers on the second circle
-for i = 121:240
-    x = r2 * cos((i-60)/240*2*pi);
+% label the 2nd circle
+for i = 240:-1:121
+    x = r2 * cos((i+60)/240*2*pi);
     y = r2 * sin((i-60)/240*2*pi);
-    text(x0-x, y0-y, num2str(i));
+    text(x0+x, y0+y, num2str(i));
 end
-
-% Draw the grid
-for i = 1:20
-    line([-r, r], [-r+(i-1)*(r*2/20), -r+(i-1)*(r*2/20)], 'Color', 'black');
-    line([-r+(i-1)*(r*2/20), -r+(i-1)*(r*2/20)], [-r, r], 'Color', 'black');
-    text(-r-0.05,-r+(i-1)*(r*2/20), num2str(20-i+1));
-    text(-r+(i-1)*(r*2/20),r+0.05, num2str(i));
-end
-
-axis equal;
